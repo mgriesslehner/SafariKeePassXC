@@ -38,7 +38,7 @@ Safari Extension (sandboxed)  <--Unix socket-->  Host App (BridgeServer)  <--Uni
 
 ## Download
 
-- [SafariKeePassXC Official Website]([https://keepassxc.org](https://www.griesslehner.at/safarikeepassxc.html)) 
+- [SafariKeePassXC Official Website](https://www.griesslehner.at/safarikeepassxc.html) 
 
 ## Building
 
