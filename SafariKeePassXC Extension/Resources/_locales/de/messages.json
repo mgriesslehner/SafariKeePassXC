@@ -1,0 +1,101 @@
+{
+    "extension_name": {
+        "message": "SafariKeePassXC Extension"
+    },
+    "extension_description": {
+        "message": "Füllt Logins, Passwörter und TOTP-Codes aus KeePassXC in Safari aus. Entwickelt von Markus Griesslehner."
+    },
+    "entries_heading": {
+        "message": "Logins für diese Seite"
+    },
+    "button_associate": {
+        "message": "Mit KeePassXC verbinden"
+    },
+    "button_generate": {
+        "message": "Passwort generieren"
+    },
+    "button_totp": {
+        "message": "TOTP kopieren"
+    },
+    "error_host_app_not_running": {
+        "message": "Die SafariKeePassXC-App läuft nicht. Bitte starte sie und lass sie geöffnet."
+    },
+    "error_keepassxc_not_reachable": {
+        "message": "KeePassXC ist nicht erreichbar. Läuft KeePassXC und ist die Browser-Integration aktiviert?"
+    },
+    "error_database_locked": {
+        "message": "Die KeePassXC-Datenbank ist gesperrt. Bitte entsperren."
+    },
+    "error_not_associated": {
+        "message": "Noch nicht mit KeePassXC verbunden."
+    },
+    "error_generic": {
+        "message": "Fehler: $DETAILS$",
+        "placeholders": {
+            "details": { "content": "$1" }
+        }
+    },
+    "error_unknown": {
+        "message": "unbekannt"
+    },
+    "entries_empty": {
+        "message": "Keine Einträge für diese Seite."
+    },
+    "entry_fill_tooltip": {
+        "message": "Ausfüllen"
+    },
+    "fill_no_form": {
+        "message": "Kein Login-Formular auf dieser Seite gefunden."
+    },
+    "status_associating": {
+        "message": "Verbinde… (bitte Dialog in KeePassXC bestätigen)"
+    },
+    "status_not_associated": {
+        "message": "KeePassXC $VERSION$ – noch nicht verbunden.",
+        "placeholders": {
+            "version": { "content": "$1" }
+        }
+    },
+    "status_connected": {
+        "message": "Verbunden mit KeePassXC $VERSION$",
+        "placeholders": {
+            "version": { "content": "$1" }
+        }
+    },
+    "copied_to_clipboard": {
+        "message": "(in Zwischenablage kopiert)"
+    },
+    "totp_no_website": {
+        "message": "Keine Website im aktiven Tab."
+    },
+    "totp_no_entry": {
+        "message": "Kein TOTP-Eintrag für diese Seite."
+    },
+    "save_banner_new": {
+        "message": "Login „$LOGIN$“ für diese Seite in KeePassXC speichern?",
+        "placeholders": {
+            "login": { "content": "$1" }
+        }
+    },
+    "save_banner_update": {
+        "message": "Gespeichertes Passwort für „$LOGIN$“ in KeePassXC aktualisieren?",
+        "placeholders": {
+            "login": { "content": "$1" }
+        }
+    },
+    "save_banner_button_save": {
+        "message": "Speichern"
+    },
+    "save_banner_button_update": {
+        "message": "Aktualisieren"
+    },
+    "save_banner_dismiss": {
+        "message": "Jetzt nicht"
+    },
+    "save_group_label": {
+        "message": "Neue Logins speichern in"
+    },
+    "save_group_default": {
+        "message": "Standardgruppe (KeePassXC-Browser Passwords)"
+    }
+}

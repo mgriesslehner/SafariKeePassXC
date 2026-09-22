@@ -1,0 +1,843 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		285A9261301A3D3D0095A821 /* SafariKeePassXC Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 285A9260301A3D3D0095A821 /* SafariKeePassXC Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		285A92A6301A46690095A821 /* Sodium in Frameworks */ = {isa = PBXBuildFile; productRef = 285A92A5301A46690095A821 /* Sodium */; };
+		285A92A8301A46AA0095A821 /* Clibsodium in Frameworks */ = {isa = PBXBuildFile; productRef = 285A92A7301A46AA0095A821 /* Clibsodium */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		285A924B301A3D3D0095A821 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 285A9228301A3D3C0095A821 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 285A922F301A3D3C0095A821;
+			remoteInfo = SafariKeePassXC;
+		};
+		285A9255301A3D3D0095A821 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 285A9228301A3D3C0095A821 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 285A922F301A3D3C0095A821;
+			remoteInfo = SafariKeePassXC;
+		};
+		285A9262301A3D3D0095A821 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 285A9228301A3D3C0095A821 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 285A925F301A3D3D0095A821;
+			remoteInfo = "SafariKeePassXC Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		285A927F301A3D3D0095A821 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				285A9261301A3D3D0095A821 /* SafariKeePassXC Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		285A9230301A3D3C0095A821 /* SafariKeePassXC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SafariKeePassXC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		285A924A301A3D3D0095A821 /* SafariKeePassXCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafariKeePassXCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		285A9254301A3D3D0095A821 /* SafariKeePassXCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafariKeePassXCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		285A9260301A3D3D0095A821 /* SafariKeePassXC Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SafariKeePassXC Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		285A9279301A3D3D0095A821 /* Exceptions for "SafariKeePassXC Extension" folder in "SafariKeePassXC Extension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 285A925F301A3D3D0095A821 /* SafariKeePassXC Extension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		285A9232301A3D3C0095A821 /* SafariKeePassXC */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SafariKeePassXC;
+			sourceTree = "<group>";
+		};
+		285A924D301A3D3D0095A821 /* SafariKeePassXCTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SafariKeePassXCTests;
+			sourceTree = "<group>";
+		};
+		285A9264301A3D3D0095A821 /* SafariKeePassXC Extension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				285A9279301A3D3D0095A821 /* Exceptions for "SafariKeePassXC Extension" folder in "SafariKeePassXC Extension" target */,
+			);
+			explicitFolders = (
+				Resources/_locales,
+				Resources/images,
+			);
+			path = "SafariKeePassXC Extension";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		285A922D301A3D3C0095A821 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				285A92A6301A46690095A821 /* Sodium in Frameworks */,
+				285A92A8301A46AA0095A821 /* Clibsodium in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		285A9247301A3D3D0095A821 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		285A9251301A3D3D0095A821 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		285A925D301A3D3D0095A821 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		285A9227301A3D3C0095A821 = {
+			isa = PBXGroup;
+			children = (
+				285A9232301A3D3C0095A821 /* SafariKeePassXC */,
+				285A924D301A3D3D0095A821 /* SafariKeePassXCTests */,
+				285A9264301A3D3D0095A821 /* SafariKeePassXC Extension */,
+				285A92A4301A46690095A821 /* Frameworks */,
+				285A9231301A3D3C0095A821 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		285A9231301A3D3C0095A821 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				285A9230301A3D3C0095A821 /* SafariKeePassXC.app */,
+				285A924A301A3D3D0095A821 /* SafariKeePassXCTests.xctest */,
+				285A9254301A3D3D0095A821 /* SafariKeePassXCUITests.xctest */,
+				285A9260301A3D3D0095A821 /* SafariKeePassXC Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		285A92A4301A46690095A821 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		285A922F301A3D3C0095A821 /* SafariKeePassXC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 285A9280301A3D3D0095A821 /* Build configuration list for PBXNativeTarget "SafariKeePassXC" */;
+			buildPhases = (
+				285A922C301A3D3C0095A821 /* Sources */,
+				285A922D301A3D3C0095A821 /* Frameworks */,
+				285A922E301A3D3C0095A821 /* Resources */,
+				285A927F301A3D3D0095A821 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				285A9263301A3D3D0095A821 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				285A9232301A3D3C0095A821 /* SafariKeePassXC */,
+			);
+			name = SafariKeePassXC;
+			packageProductDependencies = (
+				285A92A5301A46690095A821 /* Sodium */,
+				285A92A7301A46AA0095A821 /* Clibsodium */,
+			);
+			productName = SafariKeePassXC;
+			productReference = 285A9230301A3D3C0095A821 /* SafariKeePassXC.app */;
+			productType = "com.apple.product-type.application";
+		};
+		285A9249301A3D3D0095A821 /* SafariKeePassXCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 285A9283301A3D3D0095A821 /* Build configuration list for PBXNativeTarget "SafariKeePassXCTests" */;
+			buildPhases = (
+				285A9246301A3D3D0095A821 /* Sources */,
+				285A9247301A3D3D0095A821 /* Frameworks */,
+				285A9248301A3D3D0095A821 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				285A924C301A3D3D0095A821 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				285A924D301A3D3D0095A821 /* SafariKeePassXCTests */,
+			);
+			name = SafariKeePassXCTests;
+			packageProductDependencies = (
+			);
+			productName = SafariKeePassXCTests;
+			productReference = 285A924A301A3D3D0095A821 /* SafariKeePassXCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		285A9253301A3D3D0095A821 /* SafariKeePassXCUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 285A9286301A3D3D0095A821 /* Build configuration list for PBXNativeTarget "SafariKeePassXCUITests" */;
+			buildPhases = (
+				285A9250301A3D3D0095A821 /* Sources */,
+				285A9251301A3D3D0095A821 /* Frameworks */,
+				285A9252301A3D3D0095A821 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				285A9256301A3D3D0095A821 /* PBXTargetDependency */,
+			);
+			name = SafariKeePassXCUITests;
+			packageProductDependencies = (
+			);
+			productName = SafariKeePassXCUITests;
+			productReference = 285A9254301A3D3D0095A821 /* SafariKeePassXCUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		285A925F301A3D3D0095A821 /* SafariKeePassXC Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 285A927A301A3D3D0095A821 /* Build configuration list for PBXNativeTarget "SafariKeePassXC Extension" */;
+			buildPhases = (
+				285A925C301A3D3D0095A821 /* Sources */,
+				285A925D301A3D3D0095A821 /* Frameworks */,
+				285A925E301A3D3D0095A821 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				285A9264301A3D3D0095A821 /* SafariKeePassXC Extension */,
+			);
+			name = "SafariKeePassXC Extension";
+			packageProductDependencies = (
+			);
+			productName = "SafariKeePassXC Extension";
+			productReference = 285A9260301A3D3D0095A821 /* SafariKeePassXC Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		285A9228301A3D3C0095A821 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					285A922F301A3D3C0095A821 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					285A9249301A3D3D0095A821 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 285A922F301A3D3C0095A821;
+					};
+					285A9253301A3D3D0095A821 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 285A922F301A3D3C0095A821;
+					};
+					285A925F301A3D3D0095A821 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+				};
+			};
+			buildConfigurationList = 285A922B301A3D3C0095A821 /* Build configuration list for PBXProject "SafariKeePassXC" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 285A9227301A3D3C0095A821;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				285A9289301A43030095A821 /* XCRemoteSwiftPackageReference "swift-sodium" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 285A9231301A3D3C0095A821 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				285A922F301A3D3C0095A821 /* SafariKeePassXC */,
+				285A9249301A3D3D0095A821 /* SafariKeePassXCTests */,
+				285A9253301A3D3D0095A821 /* SafariKeePassXCUITests */,
+				285A925F301A3D3D0095A821 /* SafariKeePassXC Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		285A922E301A3D3C0095A821 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		285A9248301A3D3D0095A821 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		285A9252301A3D3D0095A821 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		285A925E301A3D3D0095A821 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		285A922C301A3D3C0095A821 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		285A9246301A3D3D0095A821 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		285A9250301A3D3D0095A821 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		285A925C301A3D3D0095A821 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		285A924C301A3D3D0095A821 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 285A922F301A3D3C0095A821 /* SafariKeePassXC */;
+			targetProxy = 285A924B301A3D3D0095A821 /* PBXContainerItemProxy */;
+		};
+		285A9256301A3D3D0095A821 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 285A922F301A3D3C0095A821 /* SafariKeePassXC */;
+			targetProxy = 285A9255301A3D3D0095A821 /* PBXContainerItemProxy */;
+		};
+		285A9263301A3D3D0095A821 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 285A925F301A3D3D0095A821 /* SafariKeePassXC Extension */;
+			targetProxy = 285A9262301A3D3D0095A821 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		285A927B301A3D3D0095A821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "SafariKeePassXC Extension/SafariKeePassXC Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2609211;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SafariKeePassXC Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SafariKeePassXC Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = at.griesslehner.SafariKeePassXC.Extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		285A927C301A3D3D0095A821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "SafariKeePassXC Extension/SafariKeePassXC Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2609211;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SafariKeePassXC Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SafariKeePassXC Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = at.griesslehner.SafariKeePassXC.Extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		285A927D301A3D3D0095A821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		285A927E301A3D3D0095A821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		285A9281301A3D3D0095A821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SafariKeePassXC/SafariKeePassXC.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2609211;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SafariKeePassXC;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = at.griesslehner.SafariKeePassXC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		285A9282301A3D3D0095A821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SafariKeePassXC/SafariKeePassXC.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2609211;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SafariKeePassXC;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = at.griesslehner.SafariKeePassXC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		285A9284301A3D3D0095A821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = at.griesslehner.SafariKeePassXCTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SafariKeePassXC.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SafariKeePassXC";
+			};
+			name = Debug;
+		};
+		285A9285301A3D3D0095A821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = at.griesslehner.SafariKeePassXCTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SafariKeePassXC.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SafariKeePassXC";
+			};
+			name = Release;
+		};
+		285A9287301A3D3D0095A821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = at.griesslehner.SafariKeePassXCUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = SafariKeePassXC;
+			};
+			name = Debug;
+		};
+		285A9288301A3D3D0095A821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7JA2A4L8LB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = at.griesslehner.SafariKeePassXCUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = SafariKeePassXC;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		285A922B301A3D3C0095A821 /* Build configuration list for PBXProject "SafariKeePassXC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				285A927D301A3D3D0095A821 /* Debug */,
+				285A927E301A3D3D0095A821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		285A927A301A3D3D0095A821 /* Build configuration list for PBXNativeTarget "SafariKeePassXC Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				285A927B301A3D3D0095A821 /* Debug */,
+				285A927C301A3D3D0095A821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		285A9280301A3D3D0095A821 /* Build configuration list for PBXNativeTarget "SafariKeePassXC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				285A9281301A3D3D0095A821 /* Debug */,
+				285A9282301A3D3D0095A821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		285A9283301A3D3D0095A821 /* Build configuration list for PBXNativeTarget "SafariKeePassXCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				285A9284301A3D3D0095A821 /* Debug */,
+				285A9285301A3D3D0095A821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		285A9286301A3D3D0095A821 /* Build configuration list for PBXNativeTarget "SafariKeePassXCUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				285A9287301A3D3D0095A821 /* Debug */,
+				285A9288301A3D3D0095A821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		285A9289301A43030095A821 /* XCRemoteSwiftPackageReference "swift-sodium" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jedisct1/swift-sodium";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		285A92A5301A46690095A821 /* Sodium */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 285A9289301A43030095A821 /* XCRemoteSwiftPackageReference "swift-sodium" */;
+			productName = Sodium;
+		};
+		285A92A7301A46AA0095A821 /* Clibsodium */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 285A9289301A43030095A821 /* XCRemoteSwiftPackageReference "swift-sodium" */;
+			productName = Clibsodium;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 285A9228301A3D3C0095A821 /* Project object */;
+}

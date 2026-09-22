@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="../Style.css">
+    <script src="../Script.js" defer></script>
+</head>
+<body>
+    <img class="app-icon" src="../Icon.png" width="96" height="96" alt="SafariKeePassXC Icon">
+
+    <p class="state-unknown" data-i18n="state_unknown">You can turn on the Safari extension in Safari Settings.</p>
+    <p class="state-on" data-i18n="state_on">The Safari extension is turned on.</p>
+    <p class="state-off" data-i18n="state_off">The Safari extension is still turned off.</p>
+
+    <button class="open-preferences" data-i18n="open_preferences">Open Safari Settings …</button>
+
+    <div class="setup">
+        <h2 data-i18n="setup_heading">Getting started</h2>
+        <ol>
+            <li data-i18n="setup_step_keepassxc">Install and start <strong>KeePassXC</strong>. In <em>Settings&nbsp;→ Browser Integration</em>, turn on <em>“Enable browser integration”</em>.</li>
+            <li data-i18n="setup_step_unlock">Unlock your database in KeePassXC.</li>
+            <li data-i18n="setup_step_enable">Turn on the extension in <em>Safari&nbsp;→ Settings&nbsp;→ Extensions</em> and allow website access.</li>
+            <li data-i18n="setup_step_connect">Click the extension icon in Safari and choose <em>“Connect to KeePassXC”</em>. Confirm and name the connection in KeePassXC.</li>
+        </ol>
+        <p class="note" data-i18n="setup_note">Important: This app is the bridge between Safari and KeePassXC - it must stay open for the extension to work. The window may be closed.</p>
+    </div>
+</body>
+</html>

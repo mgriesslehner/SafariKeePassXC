@@ -1,0 +1,11 @@
+# Xcode
+xcuserdata/
+DerivedData/
+build/
+*.xcarchive
+
+# Release artifacts
+dist/
+
+# macOS
+.DS_Store

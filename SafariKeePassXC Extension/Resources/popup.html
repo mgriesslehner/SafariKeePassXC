@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="popup.css">
+    <script type="module" src="popup.js"></script>
+</head>
+<body>
+    <header>
+        <img class="app-icon" src="images/icon-48.png" width="24" height="24" alt="SafariKeePassXC Icon">
+        <h1>SafariKeePassXC</h1>
+    </header>
+
+    <p id="status" class="status">…</p>
+
+    <section id="entries-section" hidden>
+        <h2 data-i18n="entries_heading">Logins for this page</h2>
+        <ul id="entries"></ul>
+    </section>
+
+    <section id="group-section" class="group-choice" hidden>
+        <label for="save-group" data-i18n="save_group_label">Save new logins to</label>
+        <select id="save-group"></select>
+    </section>
+
+    <div class="actions">
+        <button id="associate" data-i18n="button_associate" hidden>Connect to KeePassXC</button>
+        <button id="generate" data-i18n="button_generate">Generate password</button>
+        <button id="totp" data-i18n="button_totp">Copy TOTP</button>
+    </div>
+
+    <pre id="result" hidden></pre>
+
+    <footer><span id="version"></span>by Markus Griesslehner</footer>
+</body>
+</html>

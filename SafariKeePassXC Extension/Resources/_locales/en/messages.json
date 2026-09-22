@@ -1,0 +1,129 @@
+{
+    "extension_name": {
+        "message": "SafariKeePassXC Extension",
+        "description": "The display name for the extension."
+    },
+    "extension_description": {
+        "message": "Fills logins, passwords, and TOTP codes from KeePassXC into Safari. Developed by Markus Griesslehner.",
+        "description": "Description of what the extension does, shown in Safari's extension settings."
+    },
+    "entries_heading": {
+        "message": "Logins for this page",
+        "description": "Heading above the list of matching entries."
+    },
+    "button_associate": {
+        "message": "Connect to KeePassXC",
+        "description": "Button that starts the association with KeePassXC."
+    },
+    "button_generate": {
+        "message": "Generate password",
+        "description": "Button that generates a new password."
+    },
+    "button_totp": {
+        "message": "Copy TOTP",
+        "description": "Button that copies the TOTP code."
+    },
+    "error_host_app_not_running": {
+        "message": "The SafariKeePassXC app is not running. Please start it and keep it open.",
+        "description": "Shown when the host app is not running."
+    },
+    "error_keepassxc_not_reachable": {
+        "message": "KeePassXC is not reachable. Is KeePassXC running with browser integration enabled?",
+        "description": "Shown when KeePassXC cannot be reached."
+    },
+    "error_database_locked": {
+        "message": "The KeePassXC database is locked. Please unlock it.",
+        "description": "Shown when the database is locked."
+    },
+    "error_not_associated": {
+        "message": "Not yet connected to KeePassXC.",
+        "description": "Shown when the extension is not associated with KeePassXC."
+    },
+    "error_generic": {
+        "message": "Error: $DETAILS$",
+        "description": "Generic error message with details.",
+        "placeholders": {
+            "details": { "content": "$1" }
+        }
+    },
+    "error_unknown": {
+        "message": "unknown",
+        "description": "Placeholder when no error details are available."
+    },
+    "entries_empty": {
+        "message": "No entries for this page.",
+        "description": "Shown when no entries match the current page."
+    },
+    "entry_fill_tooltip": {
+        "message": "Fill",
+        "description": "Tooltip on an entry button that fills the login form."
+    },
+    "fill_no_form": {
+        "message": "No login form found on this page.",
+        "description": "Shown when filling failed because no form was found."
+    },
+    "status_associating": {
+        "message": "Connecting… (please confirm the dialog in KeePassXC)",
+        "description": "Shown while association is in progress."
+    },
+    "status_not_associated": {
+        "message": "KeePassXC $VERSION$ – not connected yet.",
+        "description": "Shown when connected but not associated.",
+        "placeholders": {
+            "version": { "content": "$1" }
+        }
+    },
+    "status_connected": {
+        "message": "Connected to KeePassXC $VERSION$",
+        "description": "Shown when connected and associated.",
+        "placeholders": {
+            "version": { "content": "$1" }
+        }
+    },
+    "copied_to_clipboard": {
+        "message": "(copied to clipboard)",
+        "description": "Appended after a value that was copied to the clipboard."
+    },
+    "totp_no_website": {
+        "message": "No website in the active tab.",
+        "description": "Shown when the active tab is not a website."
+    },
+    "totp_no_entry": {
+        "message": "No TOTP entry for this page.",
+        "description": "Shown when no entry with TOTP matches the current page."
+    },
+    "save_banner_new": {
+        "message": "Save the login “$LOGIN$” for this site in KeePassXC?",
+        "description": "Banner question when new credentials were submitted.",
+        "placeholders": {
+            "login": { "content": "$1" }
+        }
+    },
+    "save_banner_update": {
+        "message": "Update the saved password for “$LOGIN$” in KeePassXC?",
+        "description": "Banner question when a known login used a new password.",
+        "placeholders": {
+            "login": { "content": "$1" }
+        }
+    },
+    "save_banner_button_save": {
+        "message": "Save",
+        "description": "Banner button that stores the new entry."
+    },
+    "save_banner_button_update": {
+        "message": "Update",
+        "description": "Banner button that updates the existing entry."
+    },
+    "save_banner_dismiss": {
+        "message": "Not now",
+        "description": "Banner button that discards the queued credentials."
+    },
+    "save_group_label": {
+        "message": "Save new logins to",
+        "description": "Label of the dropdown choosing the target group for new entries."
+    },
+    "save_group_default": {
+        "message": "Default group (KeePassXC-Browser Passwords)",
+        "description": "Dropdown option for KeePassXC's default browser group."
+    }
+}

@@ -1,0 +1,134 @@
+:root {
+    color-scheme: light dark;
+}
+
+.app-icon {
+    width: 24px;
+    height: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .app-icon {
+        filter: brightness(0) invert(1);
+    }
+}
+
+body {
+    width: 300px;
+    margin: 0;
+    padding: 12px;
+    font-family: system-ui;
+    font-size: 13px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+h1 {
+    font-size: 14px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: color-mix(in srgb, currentColor 55%, transparent);
+    margin: 12px 0 4px;
+}
+
+.status {
+    margin: 4px 0;
+    color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li.empty {
+    color: color-mix(in srgb, currentColor 55%, transparent);
+    padding: 4px 0;
+}
+
+button.entry {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 6px 8px;
+    margin: 2px 0;
+    border: none;
+    border-radius: 6px;
+    background: color-mix(in srgb, currentColor 8%, transparent);
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+}
+
+button.entry:hover {
+    background: color-mix(in srgb, currentColor 16%, transparent);
+}
+
+.entry-name {
+    font-weight: 600;
+}
+
+.entry-login {
+    font-size: 12px;
+    color: color-mix(in srgb, currentColor 60%, transparent);
+}
+
+.group-choice {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 12px;
+}
+
+.group-choice label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: color-mix(in srgb, currentColor 55%, transparent);
+}
+
+.group-choice select {
+    font: inherit;
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.actions button {
+    font: inherit;
+    padding: 5px 8px;
+}
+
+pre {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    background: color-mix(in srgb, currentColor 8%, transparent);
+    white-space: pre-wrap;
+    word-break: break-all;
+    user-select: text;
+}
+
+footer {
+    margin-top: 12px;
+    font-size: 11px;
+    text-align: center;
+    color: color-mix(in srgb, currentColor 45%, transparent);
+}
