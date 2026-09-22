@@ -36,6 +36,10 @@ Safari Extension (sandboxed)  <--Unix socket-->  Host App (BridgeServer)  <--Uni
   **Settings → Browser Integration**
 - Xcode to build the app
 
+## Download
+
+- [SafariKeePassXC Official Website]([https://keepassxc.org](https://www.griesslehner.at/safarikeepassxc.html)) 
+
 ## Building
 
 1. Open `SafariKeePassXC.xcodeproj` in Xcode.
