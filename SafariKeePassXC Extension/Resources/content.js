@@ -12,6 +12,7 @@
     let requestId = 0;
     const filledFields = new WeakSet();
     let knownEntries = null;
+    let lastHref = window.location.href;
 
     // -- Helpers --
 
@@ -277,6 +278,10 @@
     console.debug("SafariKeePassXC: content script active on", window.location.href);
 
     function scan() {
+        if (window.location.href !== lastHref) {
+            lastHref = window.location.href;
+            knownEntries = null;
+        }
         attemptAutofill();
         attemptTotpFill();
     }
