@@ -89,8 +89,15 @@ browser.runtime.onMessage.addListener((request, sender) => {
     }
 
     // -- Native forwarding --
+    
+    // set-login is the only write action in the bridge API. It must only be
+    // reachable through confirm-pending-save (which enforces the save banner,
+    // host check, and TTL above); it is never forwarded here as-is.
+    if (message.action === "set-login") {
+        return Promise.resolve({ success: false, error: "forbidden_action" });
+    }
 
-    const urlBoundActions = ["get-logins", "set-login"];
+    const urlBoundActions = ["get-logins"];
     if (urlBoundActions.includes(message.action) && sender.tab && sender.url) {
         message.url = sender.url;
     }
