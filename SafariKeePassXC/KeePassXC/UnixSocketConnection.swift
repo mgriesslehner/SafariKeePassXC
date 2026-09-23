@@ -7,6 +7,8 @@
 //
 //  Raw POSIX sockets instead of Network.framework: NWConnection was unreliable on macOS 27.0.
 //
+//  TODO: connect/send/receive have no timeout; a hung KeePassXC blocks this
+//  actor's shared connection forever. Same gap in HostBridgeConnection.swift.
 
 import Foundation
 import Darwin

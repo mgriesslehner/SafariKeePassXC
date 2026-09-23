@@ -5,6 +5,9 @@
 // background prefers the sender URL over anything we send), then fill the
 // best match. KeePassXC returns entries best-match-first. TOTP fields
 // (autocomplete="one-time-code" etc.) are filled from the entry's `totp`.
+//
+// TODO: manifest's all_frames:true runs this in every iframe incl. cross-origin.
+// Considered restricting autofill/queue-save there; declined (breaks SSO iframes, no active leak).
 
 (() => {
     "use strict";
