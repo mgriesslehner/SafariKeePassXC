@@ -8,9 +8,12 @@
 //
 //  Wire format: UInt32 LE length prefix + UTF-8 JSON, matches BridgeServer.
 //
+//  Raw POSIX sockets instead of Network.framework: NWConnection was unreliable on macOS 27.0.
+//
+//  TODO: connect/send/receive have no timeout
 
 import Foundation
-import Network
+import Darwin
 
 enum HostBridgeError: LocalizedError {
     case hostAppNotRunning
@@ -36,10 +39,8 @@ enum HostBridgeConnection {
     }
 
     static func roundTrip(_ request: [String: Any]) async throws -> [String: Any] {
-        let connection = NWConnection(to: .unix(path: socketPath), using: .tcp)
-        defer { connection.cancel() }
-
-        try await connect(connection)
+        let fd = try await connect(to: socketPath)
+        defer { close(fd) }
 
         // Authenticate before sending any request. The token was written to
         // the shared Keychain access group by the host app on launch.
@@ -51,14 +52,14 @@ enum HostBridgeConnection {
         )
         var handshakeFrame = withUnsafeBytes(of: UInt32(handshakeBody.count).littleEndian) { Data($0) }
         handshakeFrame.append(handshakeBody)
-        try await send(handshakeFrame, on: connection)
+        try await send(handshakeFrame, to: fd)
 
-        let ackHeader = try await receive(exactly: 4, on: connection)
+        let ackHeader = try await receive(exactly: 4, from: fd)
         let ackLength = ackHeader.withUnsafeBytes { $0.loadUnaligned(as: UInt32.self) }.littleEndian
         guard ackLength > 0, ackLength < 1024 else {
             throw HostBridgeError.transportFailed("invalid_handshake_frame")
         }
-        let ackBody = try await receive(exactly: Int(ackLength), on: connection)
+        let ackBody = try await receive(exactly: Int(ackLength), from: fd)
         guard let ack = try JSONSerialization.jsonObject(with: ackBody) as? [String: Any],
               ack["success"] as? Bool == true else {
             throw HostBridgeError.bridgeAuthFailed
@@ -67,14 +68,14 @@ enum HostBridgeConnection {
         let body = try JSONSerialization.data(withJSONObject: request)
         var frame = withUnsafeBytes(of: UInt32(body.count).littleEndian) { Data($0) }
         frame.append(body)
-        try await send(frame, on: connection)
+        try await send(frame, to: fd)
 
-        let header = try await receive(exactly: 4, on: connection)
+        let header = try await receive(exactly: 4, from: fd)
         let length = header.withUnsafeBytes { $0.loadUnaligned(as: UInt32.self) }.littleEndian
         guard length > 0, length < 1024 * 1024 else {
             throw HostBridgeError.transportFailed("invalid_frame")
         }
-        let responseBody = try await receive(exactly: Int(length), on: connection)
+        let responseBody = try await receive(exactly: Int(length), from: fd)
 
         guard let json = try JSONSerialization.jsonObject(with: responseBody) as? [String: Any] else {
             throw HostBridgeError.transportFailed("invalid_json")
@@ -84,53 +85,94 @@ enum HostBridgeConnection {
 
     // MARK: Primitives
 
-    private static func connect(_ connection: NWConnection) async throws {
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            connection.stateUpdateHandler = { state in
-                switch state {
-                case .ready:
-                    connection.stateUpdateHandler = nil
-                    continuation.resume()
-                case .failed, .waiting:
-                    connection.stateUpdateHandler = nil
-                    connection.cancel()
-                    continuation.resume(throwing: HostBridgeError.hostAppNotRunning)
-                default:
-                    break
+    private static func connect(to path: String) async throws -> Int32 {
+        try await performBlocking {
+            let fd = socket(AF_UNIX, SOCK_STREAM, 0)
+            guard fd >= 0 else {
+                throw HostBridgeError.hostAppNotRunning
+            }
+
+            var addr = sockaddr_un()
+            addr.sun_family = sa_family_t(AF_UNIX)
+
+            let pathBytes = Array(path.utf8)
+            let capacity = MemoryLayout.size(ofValue: addr.sun_path)
+            guard pathBytes.count < capacity else {
+                close(fd)
+                throw HostBridgeError.transportFailed("path_too_long")
+            }
+            withUnsafeMutableBytes(of: &addr.sun_path) { rawBuffer in
+                let buffer = rawBuffer.bindMemory(to: UInt8.self)
+                for (index, byte) in pathBytes.enumerated() {
+                    buffer[index] = byte
+                }
+                buffer[pathBytes.count] = 0
+            }
+
+            let result = withUnsafePointer(to: &addr) { ptr -> Int32 in
+                ptr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockPtr in
+                    Darwin.connect(fd, sockPtr, socklen_t(MemoryLayout<sockaddr_un>.size))
                 }
             }
-            connection.start(queue: .global(qos: .userInitiated))
+            guard result == 0 else {
+                close(fd)
+                throw HostBridgeError.hostAppNotRunning
+            }
+
+            return fd
         }
     }
 
-    private static func send(_ data: Data, on connection: NWConnection) async throws {
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            connection.send(content: data, completion: .contentProcessed { error in
-                if let error {
-                    continuation.resume(throwing: HostBridgeError.transportFailed(error.localizedDescription))
-                } else {
-                    continuation.resume()
+    private static func send(_ data: Data, to fd: Int32) async throws {
+        try await performBlocking {
+            try data.withUnsafeBytes { (rawBuffer: UnsafeRawBufferPointer) in
+                var offset = 0
+                let total = rawBuffer.count
+                while offset < total {
+                    let n = Darwin.write(fd, rawBuffer.baseAddress!.advanced(by: offset), total - offset)
+                    if n < 0 {
+                        if errno == EINTR { continue }
+                        throw HostBridgeError.transportFailed(String(cString: strerror(errno)))
+                    }
+                    if n == 0 {
+                        throw HostBridgeError.transportFailed("connection_closed")
+                    }
+                    offset += n
                 }
-            })
+            }
         }
     }
 
-    private static func receive(exactly count: Int, on connection: NWConnection) async throws -> Data {
+    private static func receive(exactly count: Int, from fd: Int32) async throws -> Data {
         var buffer = Data()
         while buffer.count < count {
-            let chunk: Data = try await withCheckedThrowingContinuation { continuation in
-                connection.receive(minimumIncompleteLength: 1, maximumLength: count - buffer.count) { data, _, _, error in
-                    if let data, !data.isEmpty {
-                        continuation.resume(returning: data)
-                    } else if let error {
-                        continuation.resume(throwing: HostBridgeError.transportFailed(error.localizedDescription))
-                    } else {
-                        continuation.resume(throwing: HostBridgeError.transportFailed("connection_closed"))
-                    }
+            let remaining = count - buffer.count
+            let chunk = try await performBlocking { () -> Data in
+                var readBuffer = [UInt8](repeating: 0, count: remaining)
+                let n = readBuffer.withUnsafeMutableBytes { rawBuffer in
+                    Darwin.read(fd, rawBuffer.baseAddress, rawBuffer.count)
                 }
+                if n < 0 {
+                    if errno == EINTR {
+                        return Data()
+                    }
+                    throw HostBridgeError.transportFailed(String(cString: strerror(errno)))
+                }
+                if n == 0 {
+                    throw HostBridgeError.transportFailed("connection_closed")
+                }
+                return Data(readBuffer[0..<n])
             }
             buffer.append(chunk)
         }
         return buffer
+    }
+
+    private static func performBlocking<T: Sendable>(
+        _ body: @escaping @Sendable () throws -> T
+    ) async throws -> T {
+        try await Task.detached(priority: .userInitiated) {
+            try body()
+        }.value
     }
 }
