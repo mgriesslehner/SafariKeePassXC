@@ -18,9 +18,13 @@ nonisolated enum BridgeSocket {
     static let extensionBundleID = "at.griesslehner.SafariKeePassXC.Extension"
     static let socketName = "kpxc-bridge.sock"
 
-    static func pathFromHostApp() -> String {
+    static func directoryFromHostApp() -> String {
         (NSHomeDirectory() as NSString)
-            .appendingPathComponent("Library/Containers/\(extensionBundleID)/Data/\(socketName)")
+            .appendingPathComponent("Library/Containers/\(extensionBundleID)/Data")
+    }
+
+    static func pathFromHostApp() -> String {
+        (directoryFromHostApp() as NSString).appendingPathComponent(socketName)
     }
 }
 
@@ -37,12 +41,18 @@ actor BridgeServer {
             os_log(.error, "BridgeServer: token generation failed; all connections will be rejected")
         }
 
+        let directory = BridgeSocket.directoryFromHostApp()
         let path = BridgeSocket.pathFromHostApp()
         // Remove a stale socket from a previous run; bind fails otherwise.
         try? FileManager.default.removeItem(atPath: path)
 
+        guard FileManager.default.changeCurrentDirectoryPath(directory) else {
+            os_log(.error, "BridgeServer: could not chdir to %{public}@", directory)
+            return
+        }
+
         let parameters = NWParameters.tcp
-        parameters.requiredLocalEndpoint = NWEndpoint.unix(path: path)
+        parameters.requiredLocalEndpoint = NWEndpoint.unix(path: BridgeSocket.socketName)
 
         do {
             let listener = try NWListener(using: parameters)

@@ -85,6 +85,8 @@ enum HostBridgeConnection {
 
     // MARK: Primitives
 
+    private static let cwdLock = NSLock()
+
     private static func connect(to path: String) async throws -> Int32 {
         try await performBlocking {
             let fd = socket(AF_UNIX, SOCK_STREAM, 0)
@@ -98,21 +100,40 @@ enum HostBridgeConnection {
             var noSigPipe: Int32 = 1
             setsockopt(fd, SOL_SOCKET, SO_NOSIGPIPE, &noSigPipe, socklen_t(MemoryLayout<Int32>.size))
 
+            let directory = (path as NSString).deletingLastPathComponent
+            let name = (path as NSString).lastPathComponent
+
+            cwdLock.lock()
+            defer { cwdLock.unlock() }
+
+            let savedCwd = open(".", O_RDONLY)
+            guard savedCwd >= 0 else {
+                close(fd)
+                throw HostBridgeError.transportFailed(String(cString: strerror(errno)))
+            }
+            defer { close(savedCwd) }
+
+            guard chdir(directory) == 0 else {
+                close(fd)
+                throw HostBridgeError.hostAppNotRunning
+            }
+            defer { fchdir(savedCwd) }
+
             var addr = sockaddr_un()
             addr.sun_family = sa_family_t(AF_UNIX)
 
-            let pathBytes = Array(path.utf8)
+            let nameBytes = Array(name.utf8)
             let capacity = MemoryLayout.size(ofValue: addr.sun_path)
-            guard pathBytes.count < capacity else {
+            guard nameBytes.count < capacity else {
                 close(fd)
                 throw HostBridgeError.transportFailed("path_too_long")
             }
             withUnsafeMutableBytes(of: &addr.sun_path) { rawBuffer in
                 let buffer = rawBuffer.bindMemory(to: UInt8.self)
-                for (index, byte) in pathBytes.enumerated() {
+                for (index, byte) in nameBytes.enumerated() {
                     buffer[index] = byte
                 }
-                buffer[pathBytes.count] = 0
+                buffer[nameBytes.count] = 0
             }
 
             let result = withUnsafePointer(to: &addr) { ptr -> Int32 in
