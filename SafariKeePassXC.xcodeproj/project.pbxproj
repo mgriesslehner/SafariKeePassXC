@@ -386,7 +386,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "SafariKeePassXC Extension/SafariKeePassXC Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2610131;
+				CURRENT_PROJECT_VERSION = 2610161;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7JA2A4L8LB;
 				ENABLE_APP_SANDBOX = YES;
@@ -411,7 +411,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -432,7 +432,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "SafariKeePassXC Extension/SafariKeePassXC Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2610131;
+				CURRENT_PROJECT_VERSION = 2610161;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7JA2A4L8LB;
 				ENABLE_APP_SANDBOX = YES;
@@ -457,7 +457,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -605,7 +605,7 @@
 				CODE_SIGN_ENTITLEMENTS = SafariKeePassXC/SafariKeePassXC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2610131;
+				CURRENT_PROJECT_VERSION = 2610161;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7JA2A4L8LB;
 				ENABLE_APP_SANDBOX = NO;
@@ -620,7 +620,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -647,7 +647,7 @@
 				CODE_SIGN_ENTITLEMENTS = SafariKeePassXC/SafariKeePassXC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2610131;
+				CURRENT_PROJECT_VERSION = 2610161;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7JA2A4L8LB;
 				ENABLE_APP_SANDBOX = NO;
@@ -662,7 +662,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,

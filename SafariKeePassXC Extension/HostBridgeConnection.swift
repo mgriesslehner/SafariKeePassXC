@@ -92,6 +92,12 @@ enum HostBridgeConnection {
                 throw HostBridgeError.hostAppNotRunning
             }
 
+            // Without this, writing to a socket whose peer already closed
+            // raises SIGPIPE, which kills the process instead of surfacing
+            // as a catchable error.
+            var noSigPipe: Int32 = 1
+            setsockopt(fd, SOL_SOCKET, SO_NOSIGPIPE, &noSigPipe, socklen_t(MemoryLayout<Int32>.size))
+
             var addr = sockaddr_un()
             addr.sun_family = sa_family_t(AF_UNIX)
 

@@ -45,27 +45,31 @@ actor UnixSocketConnection {
             throw SocketError.connectionFailed(Self.lastErrorDescription())
         }
 
-        var addr = sockaddr_un()
-        addr.sun_family = sa_family_t(AF_UNIX)
+        // Without this, writing to a socket whose peer already closed
+        // raises SIGPIPE, which kills the process instead of surfacing
+        // as a catchable error.
+        var noSigPipe: Int32 = 1
+        setsockopt(newFd, SOL_SOCKET, SO_NOSIGPIPE, &noSigPipe, socklen_t(MemoryLayout<Int32>.size))
 
         let pathBytes = Array(path.utf8)
-        let capacity = MemoryLayout.size(ofValue: addr.sun_path)
+        let capacity = MemoryLayout.size(ofValue: sockaddr_un().sun_path)
         guard pathBytes.count < capacity else {
             close(newFd)
             throw SocketError.connectionFailed("path_too_long")
         }
-        withUnsafeMutableBytes(of: &addr.sun_path) { rawBuffer in
-            let buffer = rawBuffer.bindMemory(to: UInt8.self)
-            for (index, byte) in pathBytes.enumerated() {
-                buffer[index] = byte
-            }
-            buffer[pathBytes.count] = 0
-        }
 
         do {
             try await Self.performBlocking {
-                var addrCopy = addr
-                let result = withUnsafePointer(to: &addrCopy) { ptr -> Int32 in
+                var addr = sockaddr_un()
+                addr.sun_family = sa_family_t(AF_UNIX)
+                withUnsafeMutableBytes(of: &addr.sun_path) { rawBuffer in
+                    let buffer = rawBuffer.bindMemory(to: UInt8.self)
+                    for (index, byte) in pathBytes.enumerated() {
+                        buffer[index] = byte
+                    }
+                    buffer[pathBytes.count] = 0
+                }
+                let result = withUnsafePointer(to: &addr) { ptr -> Int32 in
                     ptr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockPtr in
                         Darwin.connect(newFd, sockPtr, socklen_t(MemoryLayout<sockaddr_un>.size))
                     }
