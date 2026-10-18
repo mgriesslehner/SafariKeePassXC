@@ -38,6 +38,7 @@ nonisolated enum BridgeToken {
             kSecAttrAccount as String: account,
             kSecValueData as String: token,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
+            kSecUseDataProtectionKeychain as String: true,
         ]
         if let group = sharedKeychainGroup() {
             attributes[kSecAttrAccessGroup as String] = group
@@ -59,6 +60,7 @@ nonisolated enum BridgeToken {
             kSecAttrAccount as String: account,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne,
+            kSecUseDataProtectionKeychain as String: true,
         ]
         if let group = sharedKeychainGroup() {
             query[kSecAttrAccessGroup as String] = group
@@ -82,6 +84,7 @@ nonisolated enum BridgeToken {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
             kSecAttrAccount as String: account,
+            kSecUseDataProtectionKeychain as String: true,
         ]
         if let group = sharedKeychainGroup() {
             query[kSecAttrAccessGroup as String] = group

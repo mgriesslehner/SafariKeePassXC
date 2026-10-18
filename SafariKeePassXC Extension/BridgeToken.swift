@@ -21,6 +21,7 @@ nonisolated enum BridgeToken {
             kSecAttrAccount as String: account,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne,
+            kSecUseDataProtectionKeychain as String: true,
         ]
         if let group = sharedKeychainGroup() {
             query[kSecAttrAccessGroup as String] = group
