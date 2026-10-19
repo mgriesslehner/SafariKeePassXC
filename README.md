@@ -18,23 +18,23 @@ directly. SafariKeePassXC works around this with a small relay:
 Safari Extension (sandboxed)  <--Unix socket-->  Host App (BridgeServer)  <--Unix socket-->  KeePassXC
 ```
 
-- The **host app** (`SafariKeePassXC`) is not sandboxed and talks to KeePassXC's socket directly via
-  `KeePassXCClient` / `KeePassXCCrypto`, using [Sodium](https://github.com/jedisct1/swift-sodium) for
-  the crypto.
-- It also runs a `BridgeServer` that listens on a Unix socket placed *inside the extension's own
-  sandbox container*, so the sandboxed extension is allowed to connect to it.
-- Every connection to that bridge socket must present a token from the Keychain before any request is
-  served, so other local processes that find the socket path can't query KeePassXC through it.
-- The extension's background script (`background.js`) talks to the bridge via native messaging
-  (`HostBridgeConnection.swift` / `SafariWebExtensionHandler.swift`), and `content.js` / `popup.js`
-  handle the in-page autofill UI.
+### Security model
+
+- **Host app <-> KeePassXC:** encrypted with the KeePassXC-Browser protocol (NaCl `crypto_box`).
+- **Safari extension ↔ host app:** a local Unix socket inside the extension's sandbox
+  container. Every connection must first present a random token from the Keychain; the
+  messages on this link are *not* encrypted a second time. They never leave your Mac.
+- Nothing is sent over the network.
+- **Clipboard:** generated passwords and TOTP codes you copy from the popup are placed on
+  the system clipboard and stay there until something else is copied. Clipboard managers
+  or Universal Clipboard (Handoff) may keep or sync them.
 
 ## Requirements
 
-- macOS with Safari
+- macOS 26.5 (Tahoe) or later, with the Safari version that ships with it
 - [KeePassXC](https://keepassxc.org) installed, with the browser integration enabled in
   **Settings → Browser Integration**
-- Xcode to build the app
+- Xcode 26 or later to build the app
 
 ## Download
 
