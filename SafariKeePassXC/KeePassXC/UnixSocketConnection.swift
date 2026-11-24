@@ -7,8 +7,9 @@
 //
 //  Raw POSIX sockets instead of Network.framework: NWConnection was unreliable on macOS 27.0.
 //
-//  TODO: connect/send/receive have no timeout; a hung KeePassXC blocks this
-//  actor's shared connection forever. Same gap in HostBridgeConnection.swift.
+//  Timeouts: connect and send are short; receive is long because KeePassXC
+//  can wait on the user (unlock prompt, association dialog). A timeout drops
+//  the connection so a hung KeePassXC can't block the shared actor forever.
 
 import Foundation
 import Darwin
@@ -28,6 +29,10 @@ actor UnixSocketConnection {
             }
         }
     }
+
+    private static let connectTimeout: TimeInterval = 5
+    private static let sendTimeout: TimeInterval = 5
+    private static let receiveTimeout: TimeInterval = 120
 
     private var fileDescriptor: Int32 = -1
 
@@ -51,6 +56,9 @@ actor UnixSocketConnection {
         var noSigPipe: Int32 = 1
         setsockopt(newFd, SOL_SOCKET, SO_NOSIGPIPE, &noSigPipe, socklen_t(MemoryLayout<Int32>.size))
 
+        Self.setTimeout(newFd, option: SO_SNDTIMEO, seconds: Self.sendTimeout)
+        Self.setTimeout(newFd, option: SO_RCVTIMEO, seconds: Self.receiveTimeout)
+
         let pathBytes = Array(path.utf8)
         let capacity = MemoryLayout.size(ofValue: sockaddr_un().sun_path)
         guard pathBytes.count < capacity else {
@@ -69,11 +77,29 @@ actor UnixSocketConnection {
                     }
                     buffer[pathBytes.count] = 0
                 }
-                let result = withUnsafePointer(to: &addr) { ptr -> Int32 in
+                let flags = fcntl(newFd, F_GETFL)
+                _ = fcntl(newFd, F_SETFL, flags | O_NONBLOCK)
+                var result = withUnsafePointer(to: &addr) { ptr -> Int32 in
                     ptr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockPtr in
                         Darwin.connect(newFd, sockPtr, socklen_t(MemoryLayout<sockaddr_un>.size))
                     }
                 }
+                if result != 0, errno == EAGAIN || errno == EINPROGRESS {
+                    var pfd = pollfd(fd: newFd, events: Int16(POLLOUT), revents: 0)
+                    let ready = Darwin.poll(&pfd, 1, Int32(Self.connectTimeout * 1000))
+                    if ready == 0 {
+                        throw SocketError.connectionFailed("timeout")
+                    }
+                    var soError: Int32 = 0
+                    var length = socklen_t(MemoryLayout<Int32>.size)
+                    getsockopt(newFd, SOL_SOCKET, SO_ERROR, &soError, &length)
+                    if ready > 0, soError == 0 {
+                        result = 0
+                    } else if soError != 0 {
+                        errno = soError
+                    }
+                }
+                _ = fcntl(newFd, F_SETFL, flags)
                 guard result == 0 else {
                     throw SocketError.connectionFailed(Self.lastErrorDescription())
                 }
@@ -92,7 +118,8 @@ actor UnixSocketConnection {
             throw SocketError.disconnected
         }
 
-        try await Self.performBlocking {
+        do {
+            try await Self.performBlocking {
             try data.withUnsafeBytes { (rawBuffer: UnsafeRawBufferPointer) in
                 var offset = 0
                 let total = rawBuffer.count
@@ -100,6 +127,7 @@ actor UnixSocketConnection {
                     let n = Darwin.write(fd, rawBuffer.baseAddress!.advanced(by: offset), total - offset)
                     if n < 0 {
                         if errno == EINTR { continue }
+                        if errno == EAGAIN { throw SocketError.connectionFailed("timeout") }
                         throw SocketError.connectionFailed(Self.lastErrorDescription())
                     }
                     if n == 0 {
@@ -108,6 +136,10 @@ actor UnixSocketConnection {
                     offset += n
                 }
             }
+            }
+        } catch {
+            disconnect()
+            throw error
         }
     }
 
@@ -117,7 +149,8 @@ actor UnixSocketConnection {
             throw SocketError.disconnected
         }
 
-        return try await Self.performBlocking {
+        do {
+            return try await Self.performBlocking {
             var buffer = [UInt8](repeating: 0, count: 64 * 1024)
             let n: Int = buffer.withUnsafeMutableBytes { rawBuffer in
                 Darwin.read(fd, rawBuffer.baseAddress, rawBuffer.count)
@@ -126,12 +159,17 @@ actor UnixSocketConnection {
                 if errno == EINTR {
                     return Data()
                 }
+                if errno == EAGAIN { throw SocketError.connectionFailed("timeout") }
                 throw SocketError.connectionFailed(Self.lastErrorDescription())
             }
             if n == 0 {
                 throw SocketError.disconnected
             }
             return Data(buffer[0..<n])
+            }
+        } catch {
+            disconnect()
+            throw error
         }
     }
 
@@ -143,6 +181,11 @@ actor UnixSocketConnection {
     }
 
     // MARK: Helpers
+
+    private static func setTimeout(_ fd: Int32, option: Int32, seconds: TimeInterval) {
+        var value = timeval(tv_sec: Int(seconds), tv_usec: 0)
+        setsockopt(fd, SOL_SOCKET, option, &value, socklen_t(MemoryLayout<timeval>.size))
+    }
 
     private static func lastErrorDescription() -> String {
         String(cString: strerror(errno))

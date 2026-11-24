@@ -65,6 +65,12 @@
     "copied_to_clipboard": {
         "message": "(in Zwischenablage kopiert)"
     },
+    "password_copied": {
+        "message": "Passwort generiert und in die Zwischenablage kopiert."
+    },
+    "clipboard_failed": {
+        "message": "Zwischenablage nicht verfügbar. Das Passwort wurde nicht angezeigt."
+    },
     "totp_no_website": {
         "message": "Keine Website im aktiven Tab."
     },

@@ -84,6 +84,14 @@
         "message": "(copied to clipboard)",
         "description": "Appended after a value that was copied to the clipboard."
     },
+    "password_copied": {
+        "message": "Password generated and copied to the clipboard.",
+        "description": "Shown after a generated password was copied; the password itself is never displayed."
+    },
+    "clipboard_failed": {
+        "message": "Clipboard unavailable. The password was not displayed.",
+        "description": "Shown when copying a generated password to the clipboard failed."
+    },
     "totp_no_website": {
         "message": "No website in the active tab.",
         "description": "Shown when the active tab is not a website."

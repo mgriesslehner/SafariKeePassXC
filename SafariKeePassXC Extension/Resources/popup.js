@@ -179,9 +179,9 @@ async function generatePassword() {
     const password = response.result?.password ?? "";
     try {
         await navigator.clipboard.writeText(password);
-        showResult(password + "\n\n" + t("copied_to_clipboard"));
+        showResult(t("password_copied"));
     } catch {
-        showResult(password);
+        showResult(t("clipboard_failed"));
     }
 }
 

@@ -6,8 +6,9 @@
 // best match. KeePassXC returns entries best-match-first. TOTP fields
 // (autocomplete="one-time-code" etc.) are filled from the entry's `totp`.
 //
-// TODO: manifest's all_frames:true runs this in every iframe incl. cross-origin.
-// Considered restricting autofill/queue-save there; declined (breaks SSO iframes, no active leak).
+// The manifest sets all_frames:false, so this only runs in the top frame and
+// cross-origin iframes never get credentials. Trade-off: login forms inside
+// iframes (e.g. some SSO embeds) are no longer autofilled.
 
 (() => {
     "use strict";

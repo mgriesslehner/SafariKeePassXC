@@ -10,7 +10,8 @@
 //
 //  Raw POSIX sockets instead of Network.framework: NWConnection was unreliable on macOS 27.0.
 //
-//  TODO: connect/send/receive have no timeout
+//  Timeouts: short for connect/send and the auth handshake; long for the
+//  actual response, since the host may be waiting on KeePassXC (and the user).
 
 import Foundation
 import Darwin
@@ -34,6 +35,11 @@ enum HostBridgeError: LocalizedError {
 
 enum HostBridgeConnection {
 
+    private static let connectTimeout: TimeInterval = 5
+    private static let sendTimeout: TimeInterval = 5
+    private static let handshakeTimeout: TimeInterval = 5
+    private static let responseTimeout: TimeInterval = 130
+
     private static var socketPath: String {
         (NSHomeDirectory() as NSString).appendingPathComponent("kpxc-bridge.sock")
     }
@@ -41,6 +47,8 @@ enum HostBridgeConnection {
     static func roundTrip(_ request: [String: Any]) async throws -> [String: Any] {
         let fd = try await connect(to: socketPath)
         defer { close(fd) }
+        setTimeout(fd, option: SO_SNDTIMEO, seconds: sendTimeout)
+        setTimeout(fd, option: SO_RCVTIMEO, seconds: handshakeTimeout)
 
         // Authenticate before sending any request. The token was written to
         // the shared Keychain access group by the host app on launch.
@@ -65,6 +73,7 @@ enum HostBridgeConnection {
             throw HostBridgeError.bridgeAuthFailed
         }
 
+        setTimeout(fd, option: SO_RCVTIMEO, seconds: responseTimeout)
         let body = try JSONSerialization.data(withJSONObject: request)
         var frame = withUnsafeBytes(of: UInt32(body.count).littleEndian) { Data($0) }
         frame.append(body)
@@ -136,11 +145,26 @@ enum HostBridgeConnection {
                 buffer[nameBytes.count] = 0
             }
 
-            let result = withUnsafePointer(to: &addr) { ptr -> Int32 in
+            // Non-blocking connect so a full listen backlog can't hang us;
+            // poll bounds the wait.
+            let flags = fcntl(fd, F_GETFL)
+            _ = fcntl(fd, F_SETFL, flags | O_NONBLOCK)
+            var result = withUnsafePointer(to: &addr) { ptr -> Int32 in
                 ptr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockPtr in
                     Darwin.connect(fd, sockPtr, socklen_t(MemoryLayout<sockaddr_un>.size))
                 }
             }
+            if result != 0, errno == EAGAIN || errno == EINPROGRESS {
+                var pfd = pollfd(fd: fd, events: Int16(POLLOUT), revents: 0)
+                let ready = Darwin.poll(&pfd, 1, Int32(connectTimeout * 1000))
+                var soError: Int32 = 0
+                var length = socklen_t(MemoryLayout<Int32>.size)
+                getsockopt(fd, SOL_SOCKET, SO_ERROR, &soError, &length)
+                if ready > 0, soError == 0 {
+                    result = 0
+                }
+            }
+            _ = fcntl(fd, F_SETFL, flags)
             guard result == 0 else {
                 close(fd)
                 throw HostBridgeError.hostAppNotRunning
@@ -148,6 +172,11 @@ enum HostBridgeConnection {
 
             return fd
         }
+    }
+
+    private static func setTimeout(_ fd: Int32, option: Int32, seconds: TimeInterval) {
+        var value = timeval(tv_sec: Int(seconds), tv_usec: 0)
+        setsockopt(fd, SOL_SOCKET, option, &value, socklen_t(MemoryLayout<timeval>.size))
     }
 
     private static func send(_ data: Data, to fd: Int32) async throws {
@@ -159,6 +188,7 @@ enum HostBridgeConnection {
                     let n = Darwin.write(fd, rawBuffer.baseAddress!.advanced(by: offset), total - offset)
                     if n < 0 {
                         if errno == EINTR { continue }
+                        if errno == EAGAIN { throw HostBridgeError.transportFailed("timeout") }
                         throw HostBridgeError.transportFailed(String(cString: strerror(errno)))
                     }
                     if n == 0 {
@@ -183,6 +213,7 @@ enum HostBridgeConnection {
                     if errno == EINTR {
                         return Data()
                     }
+                    if errno == EAGAIN { throw HostBridgeError.transportFailed("timeout") }
                     throw HostBridgeError.transportFailed(String(cString: strerror(errno)))
                 }
                 if n == 0 {

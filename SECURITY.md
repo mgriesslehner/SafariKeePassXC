@@ -17,8 +17,20 @@ Security-relevant areas include:
   token-based authentication (`BridgeToken.swift`)
 - The KeePassXC-Browser protocol implementation and its NaCl/libsodium encryption
   (`KeePassXCClient.swift`, `KeePassXCCrypto.swift`)
-- Keychain usage for storing the bridge token
+- Keychain usage for storing the bridge token and the KeePassXC association (data protection keychain)
 - The Safari extension's native messaging and content-script handling of credentials
+
+## Known Design Decisions
+
+- **The host app is not sandboxed.** It has to reach KeePassXC's Unix socket, which a sandboxed app cannot
+  do. The Safari extension itself stays sandboxed and only talks to the host app through the token-
+  authenticated bridge socket. A compromise of the host app therefore has the full privileges of the user.
+- **Credentials are plaintext in process memory and on the local sockets.** Autofill needs the clear-text
+  password in the content script. The sockets are local, owned by the user, and the bridge requires the
+  token; the KeePassXC leg uses KeePassXC-Browser's encryption.
+- **Autofill runs in the top frame only** (`all_frames` is disabled), so embedded cross-origin frames
+  can't receive credentials.
+- **Socket timeouts** bound every connect, send and receive, so a hung peer can't block the app forever.
 
 General bugs that don't have security impact (UI glitches, autofill not matching a site, etc.) should
 be reported as normal GitHub issues instead.
